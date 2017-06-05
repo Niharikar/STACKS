@@ -1,7 +1,6 @@
 #include <iostream>
 #include <bits/stdc++.h>
 #include <limits.h>
-#include <cerrno>
 #include <stdlib.h>
 using namespace std;
 
