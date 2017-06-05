@@ -1,6 +1,8 @@
 #include <iostream>
 #include <bits/stdc++.h>
 #include <limits.h>
+#include <cerrno>
+#include <stdlib.h>
 using namespace std;
 
 struct Node
@@ -25,7 +27,10 @@ class xstack
     {
         struct Node* temp;
         if(top==NULL)
-            return INT_MIN;
+        {
+            cout << "Its an Empty stack, there is nothing to POP" << endl;
+            abort();
+        }
         int val;
         temp = top;
         top  = top->next;
@@ -39,7 +44,10 @@ class xstack
         if(top)
             return top->data;
         else
-            return INT_MIN;
+        {
+            cout << "Its an Empty stack, there is nothing to return value" << endl;
+            abort();
+        }
     }
 };
 
