@@ -1,5 +1,6 @@
 #include <iostream>
 #include <bits/stdc++.h>
+#include <limits.h>
 using namespace std;
 
 struct Node
@@ -8,33 +9,37 @@ struct Node
     struct Node* next;
 };
 
-struct Node* top = NULL;
-
 class xstack   
-{  
+{
     public:
+    struct Node* top = NULL;
     void Push(int x)
     {
         Node* temp = new Node;
         temp->data = x;
-        temp->next = NULL;
+        temp->next = top;
         top = temp;
     }
     
-    void Pop()
+    int Pop()
     {
         struct Node* temp;
         if(top==NULL)
-            return;
-         
+            return INT_MIN;
+        int val;
         temp = top;
         top  = top->next;
+        val = temp->data;
         delete temp;
+        return val;
     }
     
     int Top()
     {
-        return top->data;
+        if(top)
+            return top->data;
+        else
+            return INT_MIN;
     }
 };
 
@@ -45,7 +50,7 @@ int main()
    S.Push(56);
    S.Push(34);
    S.Push(45);
-   //S.Pop();
+   cout << S.Pop() << endl;
    cout << S.Top() << endl;
    return 0;
 }
