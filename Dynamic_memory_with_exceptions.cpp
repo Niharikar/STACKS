@@ -4,21 +4,22 @@
 #include <exception>
 using namespace std;
 
-int i = -1;   // top element
+//int i = -1;   // top element
 
 class Xstack
 {
-    
+    int i = -1;
+    int j = 0;
     public:
     int *arr;
+    Xstack()
+    {
+        arr = (int*)malloc(1000*sizeof(int));
+    }
     void push(int x)
     {
-        if(i==-1)
-        {
-            arr = (int*)malloc(3*sizeof(int));
-            arr[++i] = x;
-        }
-        else if(i < 2)
+        
+        if((i-j) < 999)
         {
             arr[++i] = x;
         }
@@ -26,6 +27,7 @@ class Xstack
         {   
              arr = (int*)realloc(arr,2*(i+1)*sizeof(int));
              arr[++i] = x;    
+             j = i;
         }
 
     }
@@ -42,7 +44,7 @@ class Xstack
         
         catch(int e)
         {
-            cout << "Exception " << endl;
+            cout << "Exception: No elements in the stack" << endl;
         }
         
     }
@@ -59,7 +61,7 @@ class Xstack
        
         catch(int e)
         {
-            cout << "Exception " << endl;
+            cout << "Exception: No elements in the stack " << endl;
         }
         
         
@@ -70,11 +72,18 @@ class Xstack
 
 int main()
 {
-  Xstack S;
-  S.push(23);
+  Xstack S1,S2;
+  for(int i = 0;i<1050;i++)
+      S1.push(23);
+  S2.push(344);
+  S2.push(45);
   
- cout << S.pop() << endl;
- cout << S.top() << endl;
+  cout << S2.pop() << endl;
+  cout << S2.pop() << endl;
+  cout << S2.top() << endl;
+  
+  
+  cout << S1.top() << endl;
    
     
 }
