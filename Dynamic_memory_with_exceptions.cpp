@@ -2,32 +2,42 @@
 #include <stdlib.h>
 #include <bits/stdc++.h>
 #include <exception>
+#define DEFAULT_STACK_SIZE 1000
 using namespace std;
+
 
 //int i = -1;   // top element
 
 class Xstack
 {
-    int i = -1;
-    int j = 0;
+    int t; // top element in stack
+    int size;
+    
     public:
     int *arr;
     Xstack()
     {
-        arr = (int*)malloc(1000*sizeof(int));
+        arr = (int*)malloc(DEFAULT_STACK_SIZE*sizeof(int));
+        t = -1;
+        size = DEFAULT_STACK_SIZE;
+    }
+    ~Xstack()
+    {
+        free(arr);
     }
     void push(int x)
     {
         
-        if((i-j) < 999)
+        if(t < size-1)
         {
-            arr[++i] = x;
+            arr[++t] = x;
         }
         else
         {   
-             arr = (int*)realloc(arr,2*(i+1)*sizeof(int));
-             arr[++i] = x;    
-             j = i;
+            size  = size*2;
+            arr = (int*)realloc(arr,(size)*sizeof(int));
+            arr[++t] = x;    
+            
         }
 
     }
@@ -36,10 +46,10 @@ class Xstack
     {
         try
         {
-            if(i>-1)
-                return arr[i--]; 
+            if(t>-1)
+                return arr[t--]; 
             else
-                throw i;
+                throw t;
         }
         
         catch(int e)
@@ -53,10 +63,10 @@ class Xstack
     {
         try
         {
-            if(i>-1)
-                return arr[i];
+            if(t>-1)
+                return arr[t];
             else
-                throw i;
+                throw t;
         }
        
         catch(int e)
