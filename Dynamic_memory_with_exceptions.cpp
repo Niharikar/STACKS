@@ -11,7 +11,7 @@ using namespace std;
 class Xstack
 {
     int t; // top element in stack
-    int size;
+    int size; // size of stack
     
     public:
     int *arr;
@@ -46,12 +46,20 @@ class Xstack
     {
         try
         {
-            if(t>-1)
-                return arr[t--]; 
+            if(t>-1 && t<size) // "t<size" :any memory corruption might make 't' value greater than 'size', to avoid    
+                return arr[t--];// returning value in that condition
+            else if(t>=size)
+            {
+                throw "Exception: Memory Corruption";
+            }
+                
             else
                 throw t;
         }
-        
+        catch(char* str)
+        {
+            cout << str << endl;
+        }
         catch(int e)
         {
             cout << "Exception: No elements in the stack" << endl;
@@ -63,7 +71,7 @@ class Xstack
     {
         try
         {
-            if(t>-1)
+            if(t>-1 && t<size)
                 return arr[t];
             else
                 throw t;
