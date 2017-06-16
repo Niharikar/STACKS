@@ -36,8 +36,7 @@ class Xstack
         {   
             size  = size*2;
             arr = (int*)realloc(arr,(size)*sizeof(int));
-            arr[++t] = x;    
-            
+            arr[++t] = x;             
         }
 
     }
@@ -46,15 +45,19 @@ class Xstack
     {
         try
         {
-            if(t>-1 && t<size) // "t<size" :any memory corruption might make 't' value greater than 'size', to avoid    
+            if(t>-1 && t<size) // "t<size" :any memory corruption might make 't' value greater than 'size', to avoid
+            {
                 return arr[t--];// returning value in that condition
+            }
             else if(t>=size)
             {
                 throw "Exception: Memory Corruption";
             }
                 
             else
+            {
                 throw t;
+            }
         }
         catch(char* str)
         {
@@ -72,9 +75,13 @@ class Xstack
         try
         {
             if(t>-1 && t<size)
+            {
                 return arr[t];
+            }
             else
+            {
                 throw t;
+            }
         }
        
         catch(int e)
@@ -92,7 +99,9 @@ int main()
 {
   Xstack S1,S2;
   for(int i = 0;i<1050;i++)
+  {
       S1.push(23);
+  }
   S2.push(344);
   S2.push(45);
   
